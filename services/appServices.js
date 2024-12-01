@@ -44,4 +44,68 @@ async function deleteApp(id) {
   }
 }
 
-export { getApps, addApp, deleteApp };
+// update first time when data doesnt exist
+async function updateAppDate(id, status) {
+  const currentDate = new Date();
+  try {
+    const response = await prisma.application.update({
+      where: {
+        id: +id,
+      },
+      data: {
+        endDate: currentDate,
+        status: status,
+      },
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// fixing if status changed by mistake
+async function resetAppDate(id) {
+  try {
+    const response = await prisma.application.update({
+      where: {
+        id: +id,
+      },
+      data: {
+        endDate: null,
+        status: "Applied",
+      },
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// change stage without changing the date
+async function updateAppStatusOnly(id, status) {
+  try {
+    const response = await prisma.application.update({
+      where: {
+        id: +id,
+      },
+      data: {
+        status: status,
+      },
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export {
+  getApps,
+  addApp,
+  deleteApp,
+  updateAppDate,
+  resetAppDate,
+  updateAppStatusOnly,
+};

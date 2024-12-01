@@ -1,4 +1,11 @@
-import { addApp, deleteApp, getApps } from "../services/appServices.js";
+import {
+  addApp,
+  deleteApp,
+  getApps,
+  resetAppDate,
+  updateAppDate,
+  updateAppStatusOnly,
+} from "../services/appServices.js";
 
 async function handleGetApps(req, res, next) {
   const data = await getApps();
@@ -18,4 +25,17 @@ async function handleDeleteApp(req, res, next) {
   return res.json(response);
 }
 
-export { handleGetApps, handleAddApp, handleDeleteApp };
+async function handleUpdateApp(req, res, next) {
+  if (req.body.date === null) {
+    const response = await updateAppDate(req.params.id, req.body.status);
+    return res.json(response);
+  } else if (req.body.status === "Applied") {
+    const response = await resetAppDate(req.params.id);
+    return res.json(response);
+  } else {
+    const response = await updateAppStatusOnly(req.params.id, req.body.status);
+    return res.json(response);
+  }
+}
+
+export { handleGetApps, handleAddApp, handleDeleteApp, handleUpdateApp };
