@@ -6,8 +6,6 @@ async function getApps() {
       orderBy: [{ applyDate: "asc" }],
     });
 
-    console.log(response);
-
     return response;
   } catch (error) {
     console.log(error);
@@ -23,8 +21,7 @@ async function addApp(companyName, location) {
         status: "Applied",
       },
     });
-
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -37,8 +34,7 @@ async function deleteApp(id) {
         id: +id,
       },
     });
-
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -57,8 +53,7 @@ async function updateAppDate(id, status) {
         status: status,
       },
     });
-
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -66,18 +61,18 @@ async function updateAppDate(id, status) {
 
 // fixing if status changed by mistake
 async function resetAppDate(id) {
+  const newDate = new Date("01-01-0000");
   try {
     const response = await prisma.application.update({
       where: {
         id: +id,
       },
       data: {
-        endDate: null,
+        endDate: newDate,
         status: "Applied",
       },
     });
-
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -94,8 +89,7 @@ async function updateAppStatusOnly(id, status) {
         status: status,
       },
     });
-
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
