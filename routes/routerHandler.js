@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { handleAddApp, handleGetApps } from "../controllers/apiController.js";
+import {
+  handleAddApp,
+  handleDeleteApp,
+  handleGetApps,
+} from "../controllers/apiController.js";
 
 const apiRouter = Router();
 
@@ -10,5 +14,7 @@ apiRouter.get("/", (req, res) => {
 apiRouter.get("/allapps", handleGetApps);
 
 apiRouter.post("/newApp", handleAddApp);
+
+apiRouter.delete("/deleteapp/:id", handleDeleteApp);
 
 export { apiRouter };

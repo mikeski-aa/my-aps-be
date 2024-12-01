@@ -1,4 +1,4 @@
-import { addApp, getApps } from "../services/appServices.js";
+import { addApp, deleteApp, getApps } from "../services/appServices.js";
 
 async function handleGetApps(req, res, next) {
   const data = await getApps();
@@ -12,4 +12,10 @@ async function handleAddApp(req, res, next) {
   return res.json(response);
 }
 
-export { handleGetApps, handleAddApp };
+async function handleDeleteApp(req, res, next) {
+  const response = await deleteApp(req.params.id);
+
+  return res.json(response);
+}
+
+export { handleGetApps, handleAddApp, handleDeleteApp };

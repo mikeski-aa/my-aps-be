@@ -30,4 +30,18 @@ async function addApp(companyName, location) {
   }
 }
 
-export { getApps, addApp };
+async function deleteApp(id) {
+  try {
+    const response = await prisma.application.delete({
+      where: {
+        id: +id,
+      },
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getApps, addApp, deleteApp };
