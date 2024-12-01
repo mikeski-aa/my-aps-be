@@ -18,6 +18,6 @@ apiRouter.post("/newApp", handleAddApp);
 
 apiRouter.delete("/deleteapp/:id", handleDeleteApp);
 
-apiRouter.delete("/updateApp/:id", handleUpdateApp);
+apiRouter.put("/updateApp/:id", handleUpdateApp);
 
 export { apiRouter };
