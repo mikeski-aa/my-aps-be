@@ -12,3 +12,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model application {
+  id Int @id @default(autoincrement())
+  companyName String
+  applyDate DateTime @default(now())
+  endDate DateTime? 
+  location String
+  status String
+}
