@@ -2,7 +2,9 @@ import prisma from "../config/config.js";
 
 async function getApps() {
   try {
-    const response = await prisma.application.findMany();
+    const response = await prisma.application.findMany({
+      orderBy: [{ applyDate: "asc" }],
+    });
 
     console.log(response);
 
@@ -28,6 +30,4 @@ async function addApp(companyName, location) {
   }
 }
 
-// addApp("test", "locationTest");
-getApps();
 export { getApps, addApp };

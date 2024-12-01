@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getApps } from "../services/appServices";
+import { handleAddApp, handleGetApps } from "../controllers/apiController.js";
 
 const apiRouter = Router();
 
@@ -7,10 +7,8 @@ apiRouter.get("/", (req, res) => {
   res.send("Test");
 });
 
-apiRouter.get("/allapps", async (req, res) => {
-  const data = await getApps();
+apiRouter.get("/allapps", handleGetApps);
 
-  return res.json(data);
-});
+apiRouter.post("/newApp", handleAddApp);
 
 export { apiRouter };
