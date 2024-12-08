@@ -1,8 +1,10 @@
 import prisma from "../config/config.js";
 
-async function getApps() {
+// get all coding apps
+async function getApps(input) {
   try {
     const response = await prisma.application.findMany({
+      where: { type: input },
       orderBy: [{ applyDate: "asc" }],
     });
 
@@ -19,6 +21,22 @@ async function addApp(companyName, location) {
         companyName: companyName,
         location: location,
         status: "Applied",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function addAppRecruiting(companyName, location) {
+  try {
+    const response = await prisma.application.create({
+      data: {
+        companyName: companyName,
+        location: location,
+        status: "Applied",
+        type: "recruiting",
       },
     });
     return response;
@@ -102,4 +120,5 @@ export {
   updateAppDate,
   resetAppDate,
   updateAppStatusOnly,
+  addAppRecruiting,
 };

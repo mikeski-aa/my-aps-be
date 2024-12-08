@@ -1,5 +1,6 @@
 import {
   addApp,
+  addAppRecruiting,
   deleteApp,
   getApps,
   resetAppDate,
@@ -7,14 +8,33 @@ import {
   updateAppStatusOnly,
 } from "../services/appServices.js";
 
-async function handleGetApps(req, res, next) {
-  const data = await getApps();
+// get coding applications
+async function handleGetCodingApps(req, res, next) {
+  const data = await getApps("coding");
 
   return res.json(data);
 }
 
+// get recruiting apps
+async function handleGetRecApps(req, res, next) {
+  const data = await getApps("recruiting");
+
+  return res.json(data);
+}
+
+// add coding job
 async function handleAddApp(req, res, next) {
   const response = await addApp(req.body.companyName, req.body.location);
+
+  return res.json(response);
+}
+
+// add recruiting job
+async function handleAddRecJob(req, res, next) {
+  const response = await addAppRecruiting(
+    req.body.companyName,
+    req.body.location
+  );
 
   return res.json(response);
 }
@@ -41,4 +61,10 @@ async function handleUpdateApp(req, res, next) {
   }
 }
 
-export { handleGetApps, handleAddApp, handleDeleteApp, handleUpdateApp };
+export {
+  handleGetCodingApps,
+  handleAddApp,
+  handleDeleteApp,
+  handleUpdateApp,
+  handleAddRecJob,
+};

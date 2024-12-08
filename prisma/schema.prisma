@@ -14,6 +14,7 @@ datasource db {
 }
 
 
+
 model application {
   id Int @id @default(autoincrement())
   companyName String
@@ -21,4 +22,5 @@ model application {
   endDate DateTime?
   location String
   status String
+  type String @default("coding")
 }

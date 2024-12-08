@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   handleAddApp,
   handleDeleteApp,
-  handleGetApps,
+  handleGetCodingApps,
   handleUpdateApp,
 } from "../controllers/apiController.js";
 
@@ -12,7 +12,7 @@ apiRouter.get("/", (req, res) => {
   res.send("Test");
 });
 
-apiRouter.get("/allapps", handleGetApps);
+apiRouter.get("/allapps", handleGetCodingApps);
 
 apiRouter.post("/newApp", handleAddApp);
 
